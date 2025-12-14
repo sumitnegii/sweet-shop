@@ -171,6 +171,38 @@ test("admin should delete a sweet", async () => {
   const deletedSweet = await Sweet.findById(sweet._id);
   expect(deletedSweet).toBeNull();
 });
+// invtry 
+
+test("user should be able to purchase a sweet and reduce quantity", async () => {
+  // create normal user
+  const user = await User.create({
+    email: "buyer@sweet.com",
+    password: "hashed",
+    isAdmin: false,
+  });
+
+  const token = jwt.sign(
+    { email: user.email, isAdmin: false },
+    "secret123"
+  );
+
+  // create sweet with quantity
+  const sweet = await Sweet.create({
+    name: "Kaju Katli",
+    category: "Indian",
+    price: 50,
+    quantity: 5,
+  });
+
+  const res = await request(app)
+    .post(`/api/sweets/${sweet._id}/purchase`)
+    .set("Authorization", `Bearer ${token}`);
+
+  expect(res.statusCode).toBe(200);
+
+  const updatedSweet = await Sweet.findById(sweet._id);
+  expect(updatedSweet.quantity).toBe(4);
+});
 
 
 });
