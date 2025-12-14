@@ -187,6 +187,9 @@ AI significantly improved productivity and helped maintain clean, consistent cod
 
 Backend tests executed using Jest and Supertest.
 
+
+
+## Screenshots
 ###  Login Page
 ![Login Page](screenshots/login.png)
 
@@ -200,7 +203,51 @@ Backend tests executed using Jest and Supertest.
 ![Admin Panel](screenshots/admin.png)
 
 
-All tests pass successfully.
+
+
+
+
+## 🧪 Test Report
+
+The backend of the Sweet Shop Management System was developed using **Test-Driven Development (TDD)**.
+
+### Testing Tools
+- **Jest** – test runner
+- **Supertest** – HTTP assertions for Express APIs
+- **MongoDB Memory Server** – isolated database testing
+
+### Test Coverage
+The test suite validates all critical backend functionality:
+
+#### Authentication
+- User registration
+- Duplicate email prevention
+- Password hashing
+- JWT generation and validation
+- Login with valid and invalid credentials
+- Protected route access control
+
+#### Sweets Management
+- Admin-only sweet creation
+- Fetching all sweets (authenticated users)
+- Searching sweets by name and category
+- Updating sweet details (admin)
+- Deleting sweets (admin)
+
+#### Inventory Operations
+- Purchasing sweets (quantity decrement)
+- Preventing purchase when stock is zero
+- Restocking sweets (admin-only)
+
+### Test Results
+All tests pass successfully:
+
+```bash
+npm test
+
+
+
+
 
 
 ##  Author
