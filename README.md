@@ -180,6 +180,29 @@ AI significantly improved productivity and helped maintain clean, consistent cod
 
 ---
 
+
+
+
+## Test Report
+
+Backend tests executed using Jest and Supertest.
+
+###  Login Page
+![Login Page](screenshots/login.png)
+
+###  Register Page
+![Login Page](screenshots/register.png)
+
+###  User Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+###  Admin Panel
+![Admin Panel](screenshots/admin.png)
+
+
+All tests pass successfully.
+
+
 ##  Author
 
 **Sumit Negi**
