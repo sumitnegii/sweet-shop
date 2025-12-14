@@ -8,11 +8,13 @@ const {
   getAllSweets,
   searchSweets,
   updateSweet,
+  deleteSweet,
 } = require("../controllers/sweets.controller");
 
 router.post("/", authMiddleware, adminMiddleware, createSweet);
 router.get("/", authMiddleware, getAllSweets);
 router.get("/search", authMiddleware, searchSweets);
 router.put("/:id", authMiddleware, adminMiddleware, updateSweet);
+router.delete("/:id", authMiddleware, adminMiddleware, deleteSweet);
 
 module.exports = router;

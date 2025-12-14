@@ -60,3 +60,17 @@ exports.updateSweet = async (req, res) => {
 
   return res.status(200).json(updatedSweet);
 };
+
+//  deletion swts 
+
+exports.deleteSweet = async (req, res) => {
+  const { id } = req.params;
+
+  const deletedSweet = await Sweet.findByIdAndDelete(id);
+
+  if (!deletedSweet) {
+    return res.status(404).json({ message: "Sweet not found" });
+  }
+
+  return res.status(200).json({ message: "Sweet deleted successfully" });
+};
