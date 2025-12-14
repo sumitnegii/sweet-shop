@@ -45,6 +45,30 @@ describe("Auth - Register", () => {
   const users = await User.find({ email: "dup@example.com" });
   expect(users.length).toBe(1);
 });
+// new test here
+test("should login existing user and return JWT", async () => {
+  // First register user
+  await request(app)
+    .post("/api/auth/register")
+    .send({
+      email: "login@example.com",
+      password: "password123",
+    });
+
+  // Then login
+  const res = await request(app)
+    .post("/api/auth/login")
+    .send({
+      email: "login@example.com",
+      password: "password123",
+    });
+
+  expect(res.statusCode).toBe(200);
+  expect(res.body.token).toBeDefined();
+
+  const decoded = jwt.verify(res.body.token, "secret123");
+  expect(decoded.email).toBe("login@example.com");
+});
 
 
 });
