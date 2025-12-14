@@ -71,4 +71,12 @@ test("should login existing user and return JWT", async () => {
 });
 
 
+// check is failing or not
+test("should block access to protected route without token", async () => {
+  const res = await request(app).get("/api/protected");
+  expect(res.statusCode).toBe(401);
+});
+
+
+
 });
