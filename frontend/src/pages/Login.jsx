@@ -14,10 +14,10 @@ export default function Login() {
     try {
       const res = await loginUser({ email, password });
 
-      // backend returns token
+      // backend returns token here>>>>>>>>
       const token = res.data.token;
 
-      // decode minimal user info (admin flag can be added later)
+      // decode minimal user info 
       login(token, { email });
 
       navigate("/");

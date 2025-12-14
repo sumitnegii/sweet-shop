@@ -5,7 +5,7 @@ export default function Dashboard() {
   const [sweets, setSweets] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // search state
+  // search st....
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
 
@@ -52,7 +52,7 @@ export default function Dashboard() {
   <div style={{ padding: 20, maxWidth: 1000, margin: "0 auto" }}>
     <h1 style={{ marginBottom: 20 }}>Sweet Shop</h1>
 
-    {/* SEARCH BAR */}
+    {/* SEARCH BAR ........>>>>*/}
     <form
       onSubmit={handleSearch}
       style={{
@@ -82,7 +82,7 @@ export default function Dashboard() {
 
     {sweets.length === 0 && <p>No sweets found</p>}
 
-    {/* SWEET CARDS */}
+    {/* SWEET CARD>>>>>>>>>?????S */}
     <div
       style={{
         display: "grid",
