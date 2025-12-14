@@ -7,10 +7,12 @@ const {
   createSweet,
   getAllSweets,
   searchSweets,
+  updateSweet,
 } = require("../controllers/sweets.controller");
 
 router.post("/", authMiddleware, adminMiddleware, createSweet);
 router.get("/", authMiddleware, getAllSweets);
 router.get("/search", authMiddleware, searchSweets);
+router.put("/:id", authMiddleware, adminMiddleware, updateSweet);
 
 module.exports = router;

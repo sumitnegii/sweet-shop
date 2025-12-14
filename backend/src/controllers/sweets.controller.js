@@ -41,3 +41,22 @@ exports.searchSweets = async (req, res) => {
   return res.status(200).json(sweets);
 };
 
+
+
+// updation____>>
+
+exports.updateSweet = async (req, res) => {
+  const { id } = req.params;
+
+  const updatedSweet = await Sweet.findByIdAndUpdate(
+    id,
+    req.body,
+    { new: true }
+  );
+
+  if (!updatedSweet) {
+    return res.status(404).json({ message: "Sweet not found" });
+  }
+
+  return res.status(200).json(updatedSweet);
+};

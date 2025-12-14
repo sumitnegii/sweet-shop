@@ -105,6 +105,41 @@ test("should search sweets by name", async () => {
   expect(res.body[0].name).toBe("Gulab Jamun");
 });
 
+// updation
+test("admin should update a sweet", async () => {
+  // create admin
+  const admin = await User.create({
+    email: "updateadmin@sweet.com",
+    password: "hashed",
+    isAdmin: true,
+  });
+
+  const token = jwt.sign(
+    { email: admin.email, isAdmin: true },
+    "secret123"
+  );
+
+  // create sweet
+  const sweet = await Sweet.create({
+    name: "Barfi",
+    category: "Indian",
+    price: 30,
+    quantity: 50,
+  });
+
+  const res = await request(app)
+    .put(`/api/sweets/${sweet._id}`)
+    .set("Authorization", `Bearer ${token}`)
+    .send({
+      price: 40,
+      quantity: 80,
+    });
+
+  expect(res.statusCode).toBe(200);
+  expect(res.body.price).toBe(40);
+  expect(res.body.quantity).toBe(80);
+});
+
 
 });
 
