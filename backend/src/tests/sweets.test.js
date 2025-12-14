@@ -67,6 +67,43 @@ test("should get all sweets for authenticated user", async () => {
   expect(res.body.length).toBeGreaterThan(0);
 });
 
+// 
+
+test("should search sweets by name", async () => {
+  const user = await User.create({
+    email: "search@sweet.com",
+    password: "hashed",
+    isAdmin: false,
+  });
+
+  const token = jwt.sign(
+    { email: user.email, isAdmin: false },
+    "secret123"
+  );
+
+  await Sweet.create([
+    {
+      name: "Gulab Jamun",
+      category: "Indian",
+      price: 20,
+      quantity: 40,
+    },
+    {
+      name: "Chocolate Cake",
+      category: "Bakery",
+      price: 200,
+      quantity: 10,
+    },
+  ]);
+
+  const res = await request(app)
+    .get("/api/sweets/search?name=Gulab")
+    .set("Authorization", `Bearer ${token}`);
+
+  expect(res.statusCode).toBe(200);
+  expect(res.body.length).toBe(1);
+  expect(res.body[0].name).toBe("Gulab Jamun");
+});
 
 
 });
