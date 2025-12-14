@@ -14,3 +14,6 @@ export const restockSweet = (id, quantity) =>
   api.post(`/sweets/${id}/restock`, { quantity });
 export const purchaseSweet = (id) =>
   api.post(`/sweets/${id}/purchase`);
+
+export const searchSweets = (params) =>
+  api.get("/sweets/search", { params });

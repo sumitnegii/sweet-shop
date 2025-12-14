@@ -12,7 +12,7 @@ export default function Navbar() {
 
   return (
     <nav style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
-      <b>🍬 Sweet Shop</b>
+      <b>Sweet Shop</b>
 
       <span style={{ marginLeft: 20 }}>
         {user && <Link to="/">Dashboard</Link>}
