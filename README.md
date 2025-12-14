@@ -169,15 +169,6 @@ AI significantly improved productivity and helped maintain clean, consistent cod
 
 ---
 
-## Screenshots
-
-(Add screenshots of:)
-
-* Login page
-* Dashboard
-* Admin panel
-
----
 
 ##Submission Status
 
