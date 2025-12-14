@@ -12,6 +12,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "mongodb-memory-server": "^10.4.1",
     "supertest": "^7.1.4"
+  },
+  "dependencies": {
+    "mongoose": "^9.0.1"
   }
 }
