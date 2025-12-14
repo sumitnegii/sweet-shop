@@ -203,6 +203,39 @@ test("user should be able to purchase a sweet and reduce quantity", async () => 
   const updatedSweet = await Sweet.findById(sweet._id);
   expect(updatedSweet.quantity).toBe(4);
 });
+// restock 
+
+
+test("admin should be able to restock a sweet", async () => {
+  // create admin
+  const admin = await User.create({
+    email: "restockadmin@sweet.com",
+    password: "hashed",
+    isAdmin: true,
+  });
+
+  const token = jwt.sign(
+    { email: admin.email, isAdmin: true },
+    "secret123"
+  );
+
+  // create sweet
+  const sweet = await Sweet.create({
+    name: "Peda",
+    category: "Indian",
+    price: 20,
+    quantity: 5,
+  });
+
+  const res = await request(app)
+    .post(`/api/sweets/${sweet._id}/restock`)
+    .set("Authorization", `Bearer ${token}`);
+
+  expect(res.statusCode).toBe(200);
+
+  const updatedSweet = await Sweet.findById(sweet._id);
+  expect(updatedSweet.quantity).toBe(6);
+});
 
 
 });

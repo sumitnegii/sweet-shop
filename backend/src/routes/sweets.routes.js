@@ -10,6 +10,7 @@ const {
   updateSweet,
   deleteSweet,
   purchaseSweet,
+  restockSweet,
 } = require("../controllers/sweets.controller");
 
 router.post("/", authMiddleware, adminMiddleware, createSweet);
@@ -18,7 +19,8 @@ router.get("/search", authMiddleware, searchSweets);
 router.put("/:id", authMiddleware, adminMiddleware, updateSweet);
 router.delete("/:id", authMiddleware, adminMiddleware, deleteSweet);
 
-// purchase route ___________>>>>>
+// inventory
 router.post("/:id/purchase", authMiddleware, purchaseSweet);
+router.post("/:id/restock", authMiddleware, adminMiddleware, restockSweet);
 
 module.exports = router;
