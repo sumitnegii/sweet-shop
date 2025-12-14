@@ -23,17 +23,28 @@ describe("Auth - Register", () => {
     expect(res.body.password).toBeUndefined();
   });
 
-  test("user should be saved in database on register", async () => {
-    await request(app)
-      .post("/api/auth/register")
-      .send({
-        email: "db@example.com",
-        password: "password123",
-      });
+  test("should not allow duplicate email registration", async () => {
+  // first registration
+  await request(app)
+    .post("/api/auth/register")
+    .send({
+      email: "dup@example.com",
+      password: "password123",
+    });
 
-    const user = await User.findOne({ email: "db@example.com" });
+  // duplicate registration
+  const res = await request(app)
+    .post("/api/auth/register")
+    .send({
+      email: "dup@example.com",
+      password: "password123",
+    });
 
-    expect(user).not.toBeNull();
-  });
+  expect(res.statusCode).toBe(409);
+
+  const users = await User.find({ email: "dup@example.com" });
+  expect(users.length).toBe(1);
+});
+
 
 });
