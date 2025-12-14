@@ -12,3 +12,7 @@ exports.createSweet = async (req, res) => {
 
   return res.status(201).json(sweet);
 };
+exports.getAllSweets = async (req, res) => {
+  const sweets = await Sweet.find();
+  return res.status(200).json(sweets);
+};

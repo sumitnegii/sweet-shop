@@ -33,4 +33,41 @@ describe("Sweets - Create", () => {
     const sweet = await Sweet.findOne({ name: "Ladoo" });
     expect(sweet).not.toBeNull();
   });
+
+
+///
+
+test("should get all sweets for authenticated user", async () => {
+  // create normal user
+  const user = await User.create({
+    email: "user@sweet.com",
+    password: "hashed",
+    isAdmin: false,
+  });
+
+  const token = jwt.sign(
+    { email: user.email, isAdmin: false },
+    "secret123"
+  );
+
+  // seed sweets
+  await Sweet.create({
+    name: "Jalebi",
+    category: "Indian",
+    price: 15,
+    quantity: 50,
+  });
+
+  const res = await request(app)
+    .get("/api/sweets")
+    .set("Authorization", `Bearer ${token}`);
+
+  expect(res.statusCode).toBe(200);
+  expect(Array.isArray(res.body)).toBe(true);
+  expect(res.body.length).toBeGreaterThan(0);
 });
+
+
+
+});
+
